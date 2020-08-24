@@ -19,7 +19,8 @@
 </template>
 
 <script>
-const configAPI = require('../../apiValidations');
+import { getRouletteStatistics } from '../../api/roulette.api';
+import configAPI from '../../apiValidations'
 
 export default {
   name: 'Stats',
@@ -45,8 +46,9 @@ export default {
 
       this.sendMessageToLog(`GET .../stats?limit=200`);
 
+        
       try {
-        const response = await this.axios.get(`${this.apiBaseUrl}stats?limit=200`);   
+        const response =  await getRouletteStatistics(200);
         configAPI.isValidStatisticsConfig(response.data); //Checks if api is Valid
         this.stats = response.data;
         this.generateStatsTable();

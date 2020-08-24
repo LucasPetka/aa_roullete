@@ -27,7 +27,8 @@ import Stats from './roulette/Stats.vue'
 import GameBoard from './roulette/GameBoard.vue'
 import Log from './roulette/Log.vue'
 import Events from './roulette/Events.vue'
-const configAPI = require('../apiValidations');
+import { getRouletteConfig } from '../api/roulette.api';
+import configAPI from '../apiValidations'
 
 export default {
   name: 'Main',
@@ -45,7 +46,7 @@ export default {
 
     async getRouletteConfiguration(){
       try {
-        const response = await this.axios.get(`${this.apiBaseUrl}configuration`);
+        const response = await getRouletteConfig();
 
         configAPI.isValidConfigurationsConfig(response.data);
 

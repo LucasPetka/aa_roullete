@@ -12,14 +12,6 @@ Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
 Vue.mixin({
-  data: function() {
-    return {
-      //Global variable of API url
-      get apiBaseUrl() {
-        return "https://dev-games-backend.advbet.com/v1/ab-roulette/1/";
-      },
-    }
-  },
   methods: {
     //Adds message to Log, in Vuex store
     sendMessageToLog: function (message) {

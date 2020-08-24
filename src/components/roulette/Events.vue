@@ -13,7 +13,8 @@
 </template>
 
 <script>
-const configAPI = require('../../apiValidations');
+import configAPI from '../../apiValidations'
+import { getNextGame, getGameById } from '../../api/roulette.api';
 
 export default {
   name: 'Events',
@@ -30,7 +31,7 @@ export default {
         this.sendMessageToLog(`GET .../nextGame`);
 
         try {
-            const response = await this.axios.get(`${this.apiBaseUrl}nextGame`);
+            const response = await getNextGame();
             //Checks if api is Valid
             configAPI.isValidSpinConfig(response.data);     
             this.incomingGame = response.data;
@@ -78,7 +79,7 @@ export default {
         this.sendMessageToLog(`GET .../game/${currentGameId}`);
 
         try {
-            const response = await this.axios.get(`${this.apiBaseUrl}game/${currentGameId}`);
+            const response = await getGameById(currentGameId);
             playedGame = response.data;
 
             if(playedGame.result == null){
