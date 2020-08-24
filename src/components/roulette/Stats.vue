@@ -30,7 +30,7 @@ export default {
     "$store.state.roulleteSpinning"(spinningState) {
       //If roulette stops Roulette stats updates
         if(spinningState == false){
-          this.getRouletteStats();
+          this.getRouletteStats(200);
         }
     }
   },
@@ -42,18 +42,18 @@ export default {
   methods: {
 
     //fetches roulette stats
-    async getRouletteStats(){
+    async getRouletteStats(limit){
 
-      this.sendMessageToLog(`GET .../stats?limit=200`);
+      this.sendMessageToLog(`GET .../stats?limit=${limit}`);
 
         
       try {
-        const response =  await getRouletteStatistics(200);
+        const response =  await getRouletteStatistics(limit);
         configAPI.isValidStatisticsConfig(response.data); //Checks if api is Valid
         this.stats = response.data;
         this.generateStatsTable();
       } catch (error) {
-        this.sendMessageToLog(`GET .../stats?limit=200 - failed: ${error}`);
+        this.sendMessageToLog(`GET .../stats?limit=${limit} - failed: ${error}`);
       }
 
     },

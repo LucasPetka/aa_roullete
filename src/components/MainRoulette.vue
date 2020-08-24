@@ -53,7 +53,7 @@ export default {
         this.$store.commit('setRouletteConfig', response.data);
         this.sendMessageToLog('GET .../configuration');
         this.$refs.gameBoard.gameBoardGeneration();
-        this.$refs.stats.getRouletteStats();
+        this.$refs.stats.getRouletteStats(200);
         this.$refs.events.getIncomingGame();
 
       } catch (error) {
